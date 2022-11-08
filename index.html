@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+
+  <title>pucit merit calculator</title>
+</head>
+
+<body>
+  <h1 class="text-center text-success m-5"> PUCIT Aggregate Calculator 2022</h1>
+   
+  <form class="text-center w-75 m-auto m-5 p-5">
+    <div class="form-row row-cols-1 row-cols-md-2">
+      <div class="col">
+        <input id="obtainedMatricMarks" type="number" class="form-control" placeholder=" Obtained Matric Marks" min="1"
+          max="1100" oninput="validity.valid||(value='');" />
+      </div>
+      <div class="col">
+        <input id="totalMatricMarks" type="number" class="form-control" placeholder="Total Matric Marks" min="1"
+          value="1100" max="1100" oninput="validity.valid||(value='');" />
+      </div>
+      <div class="col">
+        <input id="obtainedInterMarks" type="number" class="form-control" placeholder="Obtained Intermediate Marks"
+          min="1" max="1100" oninput="validity.valid||(value='');" />
+      </div>
+      <div class="col">
+        <input id="totalInterMarks" type="number" class="form-control" placeholder="Total Intermediate Marks" min="1"
+          max="1100" value="1100" oninput="validity.valid||(value='');" />
+      </div>
+      <div class="col">
+        <input id="usatMarks" type="number" class="form-control" placeholder="USAT Obtained Marks" min="1" max="100"
+          oninput="validity.valid||(value='');" />
+      </div>
+      <div class="col p-1">
+        <button id="calculateBtn" class="btn btn-success btn-block">
+          Calculate Aggregate
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div id="aggregateBox" class="text-center text-danger"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+  <script>
+    const calculateBtn = document.getElementById("calculateBtn");
+    calculateBtn.addEventListener("click", (e) => {
+      try {
+        e.preventDefault();
+        const obtainedMatricMarks = parseFloat(
+          document.getElementById("obtainedMatricMarks").value
+        );
+        const totalMatricMarks = parseFloat(
+          document.getElementById("totalMatricMarks").value
+        );
+
+        const obtainedInterMarks = parseFloat(
+          document.getElementById("obtainedInterMarks").value
+        );
+        const totalInterMarks = parseFloat(
+          document.getElementById("totalInterMarks").value
+        );
+
+        let usatMarks = parseFloat(
+          document.getElementById("usatMarks").value
+        );
+
+        if(!usatMarks) usatMarks = 0;
+        const aggregateBox = document.getElementById("aggregateBox");
+
+        const aggregate =
+          ((0.25 * obtainedMatricMarks + obtainedInterMarks) /
+            (0.25 * totalMatricMarks + totalInterMarks)) *
+          85 +
+          0.15 * usatMarks;
+
+        console.log(aggregate);
+        aggregateBox.innerText = `Your aggregate for PUCIT is : ${aggregate}`;
+      } catch (err) {
+        console.log(err.message);
+      }
+    });
+  </script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
